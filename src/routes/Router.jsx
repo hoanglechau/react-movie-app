@@ -3,8 +3,8 @@ import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import MainLayout from "../layouts/MainLayout";
 import Favorites from "../pages/Favorites";
-import FormPage from "../pages/Form";
-import Homepage from "../pages/Homepage";
+import LoginForm from "../pages/LoginForm";
+import Home from "../pages/Home";
 import MovieDetails from "../pages/MovieDetails";
 import NoMatch from "../pages/NoMatch";
 import PersonDetails from "../pages/PersonDetails";
@@ -17,7 +17,7 @@ function RequireAuth({ children }) {
   let location = useLocation();
   let auth = useAuth();
   if (!auth.user) {
-    return <Navigate to="/form" state={{ from: location }} replace />;
+    return <Navigate to="/login" state={{ from: location }} replace />;
   }
   return children;
 }
@@ -30,14 +30,14 @@ function Router() {
     <>
       <Routes location={state?.backgroundLocation || location}>
         <Route path="/" element={<MainLayout />}>
-          <Route index element={<Homepage />} />
+          <Route index element={<Home />} />
           <Route path="movie/popular/:pageId" element={<PopularMovies />} />
           <Route path="movie/:movieId" element={<MovieDetails />} />
           <Route path="tv/popular/:pageId" element={<PopularTvShows />} />
           <Route path="tv/:tvId" element={<TvShowDetails />} />
           <Route path="person/popular/:pageId" element={<PopularPeople />} />
           <Route path="person/:personId" element={<PersonDetails />} />
-          <Route path="form" element={<FormPage />} />
+          <Route path="login" element={<LoginForm />} />
           <Route path="*" element={<NoMatch />} />
           <Route
             path="/favorite"
@@ -51,7 +51,7 @@ function Router() {
       </Routes>
       {state?.backgroundLocation && (
         <Routes>
-          <Route path="/form" element={<FormPage />} />
+          <Route path="/login" element={<LoginForm />} />
         </Routes>
       )}
     </>
