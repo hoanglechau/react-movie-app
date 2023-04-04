@@ -15,7 +15,7 @@ import { Link, useLocation } from "react-router-dom";
 import MSearchBar from "../components/MSearchBar";
 import { useAuth } from "../contexts/AuthContext";
 
-export default function PrimarySearchAppBar() {
+export default function MainHeader() {
   let location = useLocation();
   let auth = useAuth();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -63,7 +63,7 @@ export default function PrimarySearchAppBar() {
       onClose={handleMenuClose}
     >
       {auth.user ? (
-        <div>
+        <Box sx={{ display: "flex", flexDirection: "column" }}>
           <Button
             color="inherit"
             component={Link}
@@ -73,18 +73,18 @@ export default function PrimarySearchAppBar() {
             {auth.user}
           </Button>
           <Button color="inherit" onClick={() => handleLogout()}>
-            Logout
+            Log out
           </Button>
-        </div>
+        </Box>
       ) : (
         <Button
           color="inherit"
           component={Link}
-          to="/form"
+          to="/login"
           state={{ backgroundLocation: location, from: location }}
           onClick={handleMenuClose}
         >
-          Login
+          Log in
         </Button>
       )}
     </Menu>
@@ -127,10 +127,9 @@ export default function PrimarySearchAppBar() {
 
         <p>Favorite</p>
       </MenuItem>
-      <MenuItem component={Link} to="/form">
+      <MenuItem component={Link} to="/login">
         <IconButton
           size="large"
-          //cool styling ui props
           aria-label="account of current user"
           aria-controls={menuId}
           disableRipple={true}
