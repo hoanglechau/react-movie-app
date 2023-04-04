@@ -8,7 +8,7 @@ import darkScrollbar from "@mui/material/darkScrollbar";
 function ThemeProvider({ children }) {
   const themeOptions = {
     palette: {
-      mode: "dark",
+      mode: "light",
       primary: {
         light: "#757ce8",
         main: "#3f50b5",
