@@ -1,21 +1,21 @@
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { useNavigate, useLocation } from "react-router-dom";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { LoadingButton } from "@mui/lab";
 import {
+  Alert,
   IconButton,
   InputAdornment,
   Stack,
   Typography,
-  Alert,
 } from "@mui/material";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { LoadingButton } from "@mui/lab";
-import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import { FormProvider, FTextField, FCheckBox } from "./form/index.js";
+import Paper from "@mui/material/Paper";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext.jsx";
+import { FTextField, FormProvider } from "./form/index.js";
 
 export default function Form() {
   let navigate = useNavigate();
@@ -112,7 +112,7 @@ export default function Form() {
                   loading={isSubmitting}
                   sx={{ mt: 3 }}
                 >
-                  Login
+                  Log in
                 </LoadingButton>
               </Stack>
             </FormProvider>
