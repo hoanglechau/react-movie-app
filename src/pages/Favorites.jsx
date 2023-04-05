@@ -5,8 +5,8 @@ import MCard from "../components/MCard";
 import TCard from "../components/TCard";
 
 function Favorites() {
-  let movieList = JSON.parse(localStorage.getItem("favoriteMovies"));
-  let TvShowList = JSON.parse(localStorage.getItem("favoriteTvShows"));
+  const movieList = JSON.parse(localStorage.getItem("favoriteMovies"));
+  const TvShowList = JSON.parse(localStorage.getItem("favoriteTvShows"));
 
   return (
     <>
