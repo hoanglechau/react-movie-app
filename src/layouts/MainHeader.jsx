@@ -220,11 +220,12 @@ function MainHeader() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar sx={{ p: { xs: 1, md: 0 } }}>
-          <Box sx={{ flexGrow: { xs: 1, sm: 0.3, md: 0.1 } }} />
+          <Box sx={{ flexGrow: { xs: 1, sm: 0.2, md: 0.1 } }} />
           <Typography
             component={Link}
             to="/"
             color="inherit"
+            ml={{ xs: 2, sm: 0 }}
             sx={{
               textDecoration: "none",
               p: 0,
