@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import MCard from "./MCard";
 
 function Trending({ trendingList, loadingTrending }) {
+  // Placeholders for loading state
   const placeholder = [0, 1, 2, 3, 4, 5];
   const detailSkeleton = (
     <Stack spacing={1}>
