@@ -2,7 +2,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import Box from "@mui/material/Box";
 import InputBase from "@mui/material/InputBase";
 import { alpha, styled } from "@mui/material/styles";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -46,12 +46,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 function MSearchBar() {
   const [searchParams, setSearchParams] = useSearchParams();
   const q = searchParams.get("q");
+  const navigate = useNavigate();
 
+  // Handle search form submission
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const q = formData.get("q");
     setSearchParams({ q });
+    // Allow for using the search function anywhere on the website
+    navigate(`/?q=${q}`);
   };
 
   return (
