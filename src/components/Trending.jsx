@@ -3,10 +3,9 @@ import Grid from "@mui/material/Grid";
 import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import React from "react";
 import MCard from "./MCard";
 
-export default function Trending({ trendingList, loadingTrending }) {
+function Trending({ trendingList, loadingTrending }) {
   const placeholder = [0, 1, 2, 3, 4, 5];
   const detailSkeleton = (
     <Stack spacing={1}>
@@ -37,12 +36,12 @@ export default function Trending({ trendingList, loadingTrending }) {
       >
         {loadingTrending
           ? placeholder.map((item) => (
-              <Grid key={item} item xs={6} sm={4} md={2}>
+              <Grid key={item} item xs={6} sm={4} md={3}>
                 {detailSkeleton}
               </Grid>
             ))
           : trendingList?.map((item) => (
-              <Grid key={item.id} item xs={6} sm={4} md={2}>
+              <Grid key={item.id} item xs={6} sm={4} md={3}>
                 <MCard key={item.id} item={item} />
               </Grid>
             ))}
@@ -50,3 +49,5 @@ export default function Trending({ trendingList, loadingTrending }) {
     </>
   );
 }
+
+export default Trending;
