@@ -10,6 +10,8 @@ function MovieDetails() {
   let { movieId } = useParams();
   const [loading, setLoading] = useState();
   const [movieDetails, setMovieDetails] = useState(null);
+
+  // Fetch movie details
   useEffect(() => {
     const fetchData = async () => {
       try {
