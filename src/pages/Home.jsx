@@ -1,5 +1,6 @@
 import Grid from "@mui/material/Grid";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import apiService from "../api/apiService";
 import { API_KEY } from "../api/config";
 import Movies from "../components/Movies";
@@ -8,6 +9,8 @@ import Trending from "../components/Trending";
 function Home() {
   const [loadingTrending, setLoadingTrending] = useState();
   const [trendingList, setTrendingList] = useState([]);
+  const [searchParams] = useSearchParams();
+  const q = searchParams.get("q");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,15 +36,17 @@ function Home() {
         direction="column"
         justifyContent={{ md: "center", xs: "flex-end" }}
         sx={{
-          minHeight: "100vh",
+          minHeight: "100vh"
         }}
       >
-        <Grid item direction="column" container>
-          <Trending
-            trendingList={trendingList}
-            loadingTrending={loadingTrending}
-          />
-        </Grid>
+        {!q && (
+          <Grid item direction="column" container>
+            <Trending
+              trendingList={trendingList}
+              loadingTrending={loadingTrending}
+            />
+          </Grid>
+        )}
 
         <Grid item direction="column" mt={5} container>
           <Movies />
