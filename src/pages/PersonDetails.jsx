@@ -5,9 +5,9 @@ import { API_KEY } from "../api/config";
 import PDetailsCard from "../components/PDetailsCard";
 
 function PersonDetails() {
-  let { personId } = useParams();
-  const [loading, setLoading] = useState();
-  const [personDetails, setpersonDetails] = useState(null);
+  const { personId } = useParams();
+  const [loading, setLoading] = useState(false);
+  const [personDetails, setPersonDetails] = useState(null);
 
   // Fetch person details
   useEffect(() => {
@@ -17,7 +17,7 @@ function PersonDetails() {
         const res = await apiService.get(
           `person/${personId}?api_key=${API_KEY}&language=en-US`
         );
-        setpersonDetails(res.data);
+        setPersonDetails(res.data);
         setLoading(false);
       } catch (e) {
         console.log(e.message);
