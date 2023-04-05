@@ -1,9 +1,9 @@
-import React, { useState, useContext, createContext } from "react";
+import { createContext, useContext, useState } from "react";
 
 const AuthContextType = {
   user: "",
   signin: null,
-  signout: null,
+  signout: null
 };
 const AuthContext = createContext(AuthContextType);
 
