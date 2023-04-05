@@ -16,6 +16,7 @@ function PopularTvShows() {
   const [tvShowList, setTvShowList] = useState([]);
   const { pageId } = useParams();
 
+  // Fetch popular TV shows
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -32,6 +33,7 @@ function PopularTvShows() {
     fetchData();
   }, [pageId]);
 
+  // Placeholders for loading state
   const placeholder = [0, 1, 2, 3, 4];
   const detailSkeleton = (
     <Stack spacing={1}>
@@ -39,6 +41,7 @@ function PopularTvShows() {
       <Skeleton variant="rectangular" width="100%" height={300} />
     </Stack>
   );
+
   return (
     <>
       <Typography variant="h5" mb={2}>
