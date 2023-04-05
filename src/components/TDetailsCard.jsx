@@ -26,7 +26,7 @@ function TDetailsCard({ tvShowDetails, loading }) {
         itemId.push(element.id);
       }
       if (itemId.includes(tvShowDetails.id)) {
-        setTvShowMessage("You've already added this TV Show!");
+        setTvShowMessage("Already Added!");
       } else {
         list.push({
           id: id,
@@ -36,7 +36,7 @@ function TDetailsCard({ tvShowDetails, loading }) {
           vote_count: voteCount
         });
         localStorage.setItem("favoriteTvShows", JSON.stringify(list));
-        setTvShowMessage("Added to Favorites!");
+        setTvShowMessage("Added!");
       }
     } else {
       localStorage.setItem("favoriteTvShows", JSON.stringify([]));
@@ -66,10 +66,12 @@ function TDetailsCard({ tvShowDetails, loading }) {
         detailSkeleton
       ) : tvShowDetails ? (
         <Stack
-          minWidth="80%"
+          maxWidth="100%"
           flexDirection={{ xs: "column", md: "row" }}
+          alignItems={{ xs: "center", md: "flex-start" }}
           sx={{
-            borderRadius: "10px"
+            borderRadius: "10px",
+            margin: "auto"
           }}
         >
           <Stack
@@ -86,24 +88,22 @@ function TDetailsCard({ tvShowDetails, loading }) {
                 src={`https://www.themoviedb.org/t/p/original/${tvShowDetails.poster_path}`}
                 sx={{
                   borderRadius: 5,
-                  height: { xs: "auto", md: 500 },
-                  p: 2
+                  height: { xs: "auto", md: 500 }
                 }}
               />
             </Box>
           </Stack>
 
           <Stack
-            my={3}
-            pl={{ xs: 0, md: 1 }}
-            minHeight="100%"
+            pl={{ xs: 0, md: 3 }}
+            maxWidth="100%"
             justifyContent="space-evenly"
-            sx={{ minWidth: { xs: "100%", md: 400 } }}
           >
             <Stack
               justifyContent="space-between"
               alignItems="center"
               flexDirection="row"
+              minHeight="100px"
             >
               <Typography mb={1} sx={{ typography: { xs: "h4", md: "h3" } }}>
                 {`${tvShowDetails.name}`}
@@ -123,17 +123,8 @@ function TDetailsCard({ tvShowDetails, loading }) {
                     size="large"
                     children={<LoyaltyIcon fontSize="large" />}
                     color="primary"
-                    sx={{
-                      marginRight: { xs: 0, md: "30px" }
-                    }}
                   />
-                  <Typography
-                    sx={{
-                      marginRight: { xs: 0, md: "34px" },
-                      marginTop: { xs: 0, md: "10px" }
-                    }}
-                    color="error"
-                  >
+                  <Typography color="error" variant="caption">
                     {tvShowMessage}
                   </Typography>
                 </Stack>
