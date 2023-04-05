@@ -16,6 +16,7 @@ function PopularPeople() {
   const [personList, setPersonList] = useState([]);
   const { pageId } = useParams();
 
+  // Fetch popular people
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -31,6 +32,8 @@ function PopularPeople() {
     };
     fetchData();
   }, [pageId]);
+
+  // Placeholders for loading state
   const placeholder = [0, 1, 2, 3, 4];
   const detailSkeleton = (
     <Stack spacing={1}>
@@ -38,6 +41,7 @@ function PopularPeople() {
       <Skeleton variant="rectangular" width="100%" height={300} />
     </Stack>
   );
+
   return (
     <>
       <Typography variant="h5" mb={2}>
