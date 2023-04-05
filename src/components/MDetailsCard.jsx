@@ -10,10 +10,13 @@ import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
+import { useAuth } from "../contexts/AuthContext";
 import { dateConvert, timeConvert } from "../utils/converters";
 
 function MDetailsCard({ movieDetails, loading }) {
   const [movieMessage, setMovieMessage] = useState();
+  // This is for the conditional rendering of the favorite button
+  const auth = useAuth();
 
   const addFavoriteMovie = (title, poster, voteAverage, voteCount, id) => {
     let list = JSON.parse(localStorage.getItem("favoriteMovies"));
@@ -104,34 +107,36 @@ function MDetailsCard({ movieDetails, loading }) {
               <Typography mb={1} sx={{ typography: { xs: "h4", md: "h3" } }}>
                 {`${movieDetails.title}`}
               </Typography>
-              <Stack flexDirection="column" alignItems="end">
-                <IconButton
-                  onClick={() =>
-                    addFavoriteMovie(
-                      movieDetails.title,
-                      movieDetails.poster_path,
-                      movieDetails.vote_average,
-                      movieDetails.vote_count,
-                      movieDetails.id
-                    )
-                  }
-                  size="large"
-                  children={<LoyaltyIcon fontSize="large" />}
-                  color="primary"
-                  sx={{
-                    marginRight: { xs: 0, md: "30px" }
-                  }}
-                />
-                <Typography
-                  sx={{
-                    marginRight: { xs: 0, md: "34px" },
-                    marginTop: { xs: 0, md: "10px" }
-                  }}
-                  color="error"
-                >
-                  {movieMessage}
-                </Typography>
-              </Stack>
+              {auth.user && (
+                <Stack flexDirection="column" alignItems="end">
+                  <IconButton
+                    onClick={() =>
+                      addFavoriteMovie(
+                        movieDetails.title,
+                        movieDetails.poster_path,
+                        movieDetails.vote_average,
+                        movieDetails.vote_count,
+                        movieDetails.id
+                      )
+                    }
+                    size="large"
+                    children={<LoyaltyIcon fontSize="large" />}
+                    color="primary"
+                    sx={{
+                      marginRight: { xs: 0, md: "30px" }
+                    }}
+                  />
+                  <Typography
+                    sx={{
+                      marginRight: { xs: 0, md: "34px" },
+                      marginTop: { xs: 0, md: "10px" }
+                    }}
+                    color="error"
+                  >
+                    {movieMessage}
+                  </Typography>
+                </Stack>
+              )}
             </Stack>
 
             <Stack my={{ xs: 2, md: 0 }}>
