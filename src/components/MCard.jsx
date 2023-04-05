@@ -7,26 +7,26 @@ import CardContent from "@mui/material/CardContent";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import * as React from "react";
 import { Link } from "react-router-dom";
 import "../styles.css";
 
-export default function MCard({ item }) {
+function MCard({ item }) {
   return (
-    <Card className="card" sx={{ width: 200, borderRadius: "3px" }}>
+    <Card
+      className="card"
+      sx={{ width: { xs: 130, md: 200 }, borderRadius: 2 }}
+    >
       <CardActionArea LinkComponent={Link} to={`/movie/${item.id}`}>
         <Box
           display="flex"
           flexDirection="column"
           justifyContent="flex-end"
-          sx={[
-            {
-              backgroundImage: `url(https://image.tmdb.org/t/p/original/${item.poster_path})`,
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "cover",
-              height: "300px",
-            },
-          ]}
+          sx={{
+            backgroundImage: `url(https://image.tmdb.org/t/p/original/${item.poster_path})`,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+            height: { xs: 200, md: 300 }
+          }}
         >
           <Paper className="content">
             <CardContent>
@@ -37,11 +37,16 @@ export default function MCard({ item }) {
                 sx={[
                   {
                     maxHeight: "30%",
-                    overflow: "hidden",
-                  },
+                    overflow: "hidden"
+                  }
                 ]}
               >
-                <Typography gutterBottom variant="body1" component="div">
+                <Typography
+                  color="primary.contrastText"
+                  gutterBottom
+                  variant="body1"
+                  component="div"
+                >
                   {`${item.title}`}
                 </Typography>
 
@@ -56,7 +61,11 @@ export default function MCard({ item }) {
                       className="recommend_icon"
                       fontSize="small"
                     />
-                    <Typography variant="subtitle2" ml={1}>
+                    <Typography
+                      color="primary.contrastText"
+                      variant="subtitle2"
+                      ml={1}
+                    >
                       {`${item.vote_average}`}
                     </Typography>
                   </Box>
@@ -66,7 +75,11 @@ export default function MCard({ item }) {
                     justifyContent="center"
                   >
                     <FavoriteIcon className="favorite_icon" fontSize="small" />
-                    <Typography variant="subtitle2" ml={1}>
+                    <Typography
+                      color="primary.contrastText"
+                      variant="subtitle2"
+                      ml={1}
+                    >
                       {`${item.vote_count}`}
                     </Typography>
                   </Box>
@@ -79,3 +92,5 @@ export default function MCard({ item }) {
     </Card>
   );
 }
+
+export default MCard;
