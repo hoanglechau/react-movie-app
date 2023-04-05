@@ -7,9 +7,9 @@ import LoginForm from "../pages/LoginForm";
 import MovieDetails from "../pages/MovieDetails";
 import NoMatch from "../pages/NoMatch";
 import PersonDetails from "../pages/PersonDetails";
-import PopularMovies from "../pages/PopularMovies";
+import TopMovies from "../pages/TopMovies";
 import PopularPeople from "../pages/PopularPeople";
-import PopularTvShows from "../pages/PopularTvShows";
+import TopTvShows from "../pages/TopTvShows";
 import TvShowDetails from "../pages/TvShowDetails";
 
 // This component is used to protect the /favorite route
@@ -32,9 +32,9 @@ function Router() {
       <Routes location={state?.backgroundLocation || location}>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />
-          <Route path="movie/popular/:pageId" element={<PopularMovies />} />
+          <Route path="movie/popular/:pageId" element={<TopMovies />} />
           <Route path="movie/:movieId" element={<MovieDetails />} />
-          <Route path="tv/popular/:pageId" element={<PopularTvShows />} />
+          <Route path="tv/popular/:pageId" element={<TopTvShows />} />
           <Route path="tv/:tvId" element={<TvShowDetails />} />
           <Route path="person/popular/:pageId" element={<PopularPeople />} />
           <Route path="person/:personId" element={<PersonDetails />} />
