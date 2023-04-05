@@ -35,7 +35,7 @@ function Home() {
       <Grid
         container
         direction="column"
-        justifyContent={{ md: "center", xs: "flex-end" }}
+        justifyContent={{ xs: "flex-start", md: "center" }}
         sx={{
           minHeight: "100vh"
         }}
