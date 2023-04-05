@@ -1,10 +1,9 @@
 export const timeConvert = (time) => {
-  let num = time;
-  let hours = num / 60;
-  let rhours = Math.floor(hours);
-  let minutes = (hours - rhours) * 60;
-  let rminutes = Math.round(minutes);
-  return rhours + "h " + rminutes + "m";
+  let hours = time / 60;
+  let roundedHours = Math.floor(hours);
+  let minutes = (hours - roundedHours) * 60;
+  let roundedMinutes = Math.round(minutes);
+  return roundedHours + "h " + roundedMinutes + "m";
 };
 
 export const dateConvert = (date) => {
