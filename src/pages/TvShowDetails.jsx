@@ -1,5 +1,3 @@
-import Divider from "@mui/material/Divider";
-import Typography from "@mui/material/Typography";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import apiService from "../api/apiService";
@@ -30,11 +28,6 @@ function TvShowDetails() {
 
   return (
     <>
-      <Typography variant="h5" mb={2}>
-        TV SHOW INFO
-      </Typography>
-      <Divider />
-
       <TDetailsCard tvShowDetails={tvShowDetails} loading={loading} />
     </>
   );
