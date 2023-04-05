@@ -49,14 +49,14 @@ function MSearchBar() {
   const navigate = useNavigate();
 
   // Handle search form submission
-  const handleSubmit = (event) => {
+  function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    const q = formData.get("q");
-    setSearchParams({ q });
+    const query = formData.get("q");
+    setSearchParams({ query });
     // Allow for using the search function anywhere on the website
-    navigate(`/?q=${q}`);
-  };
+    navigate(`/?q=${query}`);
+  }
 
   return (
     <Box component="form" onSubmit={handleSubmit}>
