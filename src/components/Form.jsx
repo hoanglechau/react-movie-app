@@ -21,10 +21,11 @@ function Form() {
   let auth = useAuth();
   let from = location.state?.from?.pathname || "/";
 
-  const onDismiss = () => {
+  const handleModalClose = () => {
     navigate(-1);
   };
 
+  // Default values for login form
   const defaultValues = {
     username: "hoang",
     password: "123456789@"
@@ -39,8 +40,10 @@ function Form() {
 
   const [showPassword, setShowPassword] = useState(false);
 
+  // Handle login form submission
   const onSubmit = (data) => {
     auth.signin(data.username, () => {
+      // Redirect to the page user was trying to access before login
       navigate(from, { replace: true });
     });
   };
@@ -50,7 +53,7 @@ function Form() {
       open={true}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
-      onClose={() => onDismiss()}
+      onClose={() => handleModalClose()}
       style={{
         display: "flex",
         justifyContent: "center",
