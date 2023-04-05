@@ -1,43 +1,40 @@
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { LoadingButton } from "@mui/lab";
-import {
-  Alert,
-  IconButton,
-  InputAdornment,
-  Stack,
-  Typography,
-} from "@mui/material";
+import LoadingButton from "@mui/lab/LoadingButton";
+import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
 import Modal from "@mui/material/Modal";
 import Paper from "@mui/material/Paper";
-import React, { useState } from "react";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext.jsx";
-import { FTextField, FormProvider } from "./form/index.js";
+import { FormProvider, FTextField } from "./form/index.js";
 
-export default function Form() {
+function Form() {
   let navigate = useNavigate();
   let location = useLocation();
   let auth = useAuth();
   let from = location.state?.from?.pathname || "/";
 
-  function onDismiss() {
+  const onDismiss = () => {
     navigate(-1);
-  }
+  };
 
   const defaultValues = {
     username: "hoang",
-    password: "123456789@",
-    remember: true,
+    password: "123456789@"
   };
 
   const methods = useForm({ defaultValues });
 
   const {
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting }
   } = methods;
 
   const [showPassword, setShowPassword] = useState(false);
@@ -53,28 +50,23 @@ export default function Form() {
       open={true}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
-      onBackdropClick={() => onDismiss()}
+      onClose={() => onDismiss()}
       style={{
         display: "flex",
         justifyContent: "center",
-        alignItems: "center",
+        alignItems: "center"
       }}
     >
       <Box>
         <Paper
           elevation={12}
           style={{
-            borderRadius: "10px",
+            borderRadius: "10px"
           }}
         >
           <div style={{ padding: "3rem" }}>
-            <Typography
-              color="primary.light"
-              variant="h3"
-              textAlign="center"
-              mb={3}
-            >
-              Log in
+            <Typography color="primary" variant="h3" textAlign="center" mb={3}>
+              Login
             </Typography>
             <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
               <Stack spacing={3} xs={3}>
@@ -99,7 +91,7 @@ export default function Form() {
                           {showPassword ? <VisibilityOff /> : <Visibility />}
                         </IconButton>
                       </InputAdornment>
-                    ),
+                    )
                   }}
                 />
               </Stack>
@@ -122,3 +114,5 @@ export default function Form() {
     </Modal>
   );
 }
+
+export default Form;
