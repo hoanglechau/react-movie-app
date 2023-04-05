@@ -52,12 +52,12 @@ function PopularMovies() {
       <Grid container direction="row" spacing={5} mt={2}>
         {loading
           ? placeholder.map((item) => (
-              <Grid key={item} item xs={6} sm={4} md={3}>
+              <Grid key={item} item xs={6} sm={3} md={3}>
                 {detailSkeleton}
               </Grid>
             ))
           : movieList.map((item) => (
-              <Grid key={item.id} item xs={6} sm={4} md={3}>
+              <Grid key={item.id} item xs={6} sm={3} md={3}>
                 <MCard key={item.id} item={item} />
               </Grid>
             ))}
