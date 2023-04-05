@@ -1,6 +1,6 @@
 import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import apiService from "../api/apiService";
 import { API_KEY } from "../api/config";
@@ -17,7 +17,6 @@ function TvShowDetails() {
         const res = await apiService.get(
           `tv/${tvId}?api_key=${API_KEY}&language=en-US&append_to_response=videos`
         );
-        console.log(res.data);
         setTvShowDetails(res.data);
         setLoading(false);
       } catch (e) {
