@@ -1,14 +1,15 @@
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import RecommendIcon from "@mui/icons-material/Recommend";
 import LoyaltyIcon from "@mui/icons-material/Loyalty";
+import RecommendIcon from "@mui/icons-material/Recommend";
 import Box from "@mui/material/Box";
+import CardMedia from "@mui/material/CardMedia";
 import Chip from "@mui/material/Chip";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import React, { useState } from "react";
+import { useState } from "react";
 import { dateConvert, timeConvert } from "../utils/converters";
 
 function MDetailsCard({ movieDetails, loading }) {
@@ -22,17 +23,17 @@ function MDetailsCard({ movieDetails, loading }) {
         itemId.push(element.id);
       }
       if (itemId.includes(movieDetails.id)) {
-        setMovieMessage("You've already added this movie!");
+        setMovieMessage("Already Added!");
       } else {
         list.push({
           id: id,
           title: title,
           poster_path: poster,
           vote_average: voteAverage,
-          vote_count: voteCount,
+          vote_count: voteCount
         });
         localStorage.setItem("favoriteMovies", JSON.stringify(list));
-        setMovieMessage("Added to Favorites!");
+        setMovieMessage("Added!");
       }
     } else {
       localStorage.setItem("favoriteMovies", JSON.stringify([]));
@@ -42,7 +43,7 @@ function MDetailsCard({ movieDetails, loading }) {
         title: title,
         poster_path: poster,
         vote_average: voteAverage,
-        vote_count: voteCount,
+        vote_count: voteCount
       });
       localStorage.setItem("favoriteMovies", JSON.stringify(list));
       setMovieMessage("Added!");
@@ -69,17 +70,21 @@ function MDetailsCard({ movieDetails, loading }) {
         >
           <Stack
             my={3}
-            minWidth="350px"
             sx={{
               borderRadius: "10px",
+              minWidth: { xs: "100%", md: 350 }
             }}
           >
             <Box>
-              <img
+              <CardMedia
+                component="img"
                 alt={`${movieDetails.title}`}
-                height="500px"
                 src={`https://www.themoviedb.org/t/p/original/${movieDetails.poster_path}`}
-                style={{ borderRadius: "10px" }}
+                sx={{
+                  borderRadius: 5,
+                  height: { xs: "auto", md: 500 },
+                  p: 2
+                }}
               />
             </Box>
           </Stack>
@@ -88,15 +93,15 @@ function MDetailsCard({ movieDetails, loading }) {
             my={3}
             pl={{ xs: 0, md: 1 }}
             minHeight="100%"
-            minWidth="400px"
             justifyContent="space-evenly"
+            sx={{ minWidth: { xs: "100%", md: 400 } }}
           >
             <Stack
               justifyContent="space-between"
               alignItems="center"
               flexDirection="row"
             >
-              <Typography mb={1} variant="h3">
+              <Typography mb={1} sx={{ typography: { xs: "h4", md: "h3" } }}>
                 {`${movieDetails.title}`}
               </Typography>
               <Stack flexDirection="column" alignItems="end">
@@ -114,13 +119,13 @@ function MDetailsCard({ movieDetails, loading }) {
                   children={<LoyaltyIcon fontSize="large" />}
                   color="primary"
                   sx={{
-                    marginRight: "30px",
+                    marginRight: { xs: 0, md: "30px" }
                   }}
                 />
                 <Typography
                   sx={{
-                    marginRight: "34px",
-                    marginTop: "10px",
+                    marginRight: { xs: 0, md: "34px" },
+                    marginTop: { xs: 0, md: "10px" }
                   }}
                   color="error"
                 >
@@ -136,7 +141,9 @@ function MDetailsCard({ movieDetails, loading }) {
             </Stack>
 
             <Stack my={{ xs: 2, md: 0 }}>
-              <Typography variant="h6">Overview</Typography>
+              <Typography sx={{ typography: { xs: "h5", md: "h6" } }}>
+                Overview
+              </Typography>
               <Typography variant="body">
                 {`${movieDetails.overview}`}
               </Typography>
@@ -173,7 +180,7 @@ function MDetailsCard({ movieDetails, loading }) {
                   key={`${item.id}`}
                   label={`${item.name}`}
                   size="small"
-                  variant="filled"
+                  variant="outlined"
                 />
               ))}
             </Stack>
