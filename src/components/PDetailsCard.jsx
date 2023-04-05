@@ -23,9 +23,13 @@ function PDetailsCard({ personDetails, loading }) {
         detailSkeleton
       ) : personDetails ? (
         <Stack
-          minWidth="80%"
+          maxWidth="100%"
           flexDirection={{ xs: "column", md: "row" }}
-          sx={{ borderRadius: "10px" }}
+          alignItems={{ xs: "center", md: "flex-start" }}
+          sx={{
+            borderRadius: "10px",
+            margin: "auto"
+          }}
         >
           <Stack
             my={3}
@@ -42,19 +46,17 @@ function PDetailsCard({ personDetails, loading }) {
                 src={`https://www.themoviedb.org/t/p/original/${personDetails.profile_path}`}
                 sx={{
                   borderRadius: 5,
-                  height: { xs: "auto", md: 500 },
-                  p: 2
+                  height: { xs: "auto", md: 500 }
                 }}
               />
             </Box>
           </Stack>
 
           <Stack
-            my={3}
-            pl={{ xs: 0, md: 1 }}
-            minHeight="100%"
+            mt={2}
+            pl={{ xs: 0, md: 3 }}
+            maxWidth="100%"
             justifyContent="space-evenly"
-            sx={{ minWidth: { xs: "100%", md: 400 } }}
           >
             <Stack>
               <Typography
@@ -80,23 +82,6 @@ function PDetailsCard({ personDetails, loading }) {
               </Stack>
             )}
 
-            {personDetails.place_of_birth && (
-              <Stack
-                my={{ xs: 2, md: 1 }}
-                flexDirection="row"
-                alignItems="center"
-              >
-                <Typography mr={1} variant="caption">
-                  Birthplace
-                </Typography>
-                <Chip
-                  label={`${personDetails.place_of_birth}`}
-                  size="small"
-                  variant="outlined"
-                />
-              </Stack>
-            )}
-
             {personDetails.deathday && (
               <Stack
                 my={{ xs: 2, md: 1 }}
@@ -104,10 +89,27 @@ function PDetailsCard({ personDetails, loading }) {
                 alignItems="center"
               >
                 <Typography mr={1} variant="caption">
-                  Died
+                  Day of Death
                 </Typography>
                 <Chip
                   label={`${dateConvert(personDetails.deathday)}`}
+                  size="small"
+                  variant="outlined"
+                />
+              </Stack>
+            )}
+
+            {personDetails.place_of_birth && (
+              <Stack
+                my={{ xs: 2, md: 1 }}
+                flexDirection="row"
+                alignItems="center"
+              >
+                <Typography mr={1} variant="caption">
+                  Place of Birth
+                </Typography>
+                <Chip
+                  label={`${personDetails.place_of_birth}`}
                   size="small"
                   variant="outlined"
                 />
