@@ -7,7 +7,7 @@ import Movies from "../components/Movies";
 import Trending from "../components/Trending";
 
 function Home() {
-  const [loadingTrending, setLoadingTrending] = useState();
+  const [loadingTrending, setLoadingTrending] = useState(false);
   const [trendingList, setTrendingList] = useState([]);
   const [searchParams] = useSearchParams();
   const q = searchParams.get("q");
