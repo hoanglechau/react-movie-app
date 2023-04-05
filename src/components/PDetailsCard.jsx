@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import { dateConvert } from "../utils/converters";
 
 function PDetailsCard({ personDetails, loading }) {
+  // Placeholder element for loading state
   const detailSkeleton = (
     <Stack spacing={1}>
       <Skeleton variant="text" />
@@ -15,6 +16,7 @@ function PDetailsCard({ personDetails, loading }) {
       <Skeleton variant="rectangular" width="100%" height={300} />
     </Stack>
   );
+
   return (
     <>
       {loading ? (
