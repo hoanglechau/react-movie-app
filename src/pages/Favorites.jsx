@@ -10,28 +10,41 @@ function Favorites() {
 
   return (
     <>
-      <Typography variant="h5" mb={2}>
-        FAVORITE MOVIES
-      </Typography>
-      <Divider />
-      <Grid container direction="row" spacing={5} mt={2}>
-        {movieList?.map((item) => (
-          <Grid key={item.id} item xs={6} sm={4} md={3}>
-            <MCard key={item.id} item={item} />
+      {!movieList && !TvShowList && (
+        <Typography variant="h5" mb={2} mt={10}>
+          You don't have any favorites yet!
+        </Typography>
+      )}
+      {movieList && (
+        <>
+          <Typography variant="h5" mb={2}>
+            FAVORITE MOVIES
+          </Typography>
+          <Divider />
+          <Grid container direction="row" spacing={5} mt={2}>
+            {movieList?.map((item) => (
+              <Grid key={item.id} item xs={6} sm={4} md={3}>
+                <MCard key={item.id} item={item} />
+              </Grid>
+            ))}
           </Grid>
-        ))}
-      </Grid>
-      <Typography variant="h5" mb={2} mt={10}>
-        FAVORITE TV SHOWS
-      </Typography>
-      <Divider />
-      <Grid container direction="row" spacing={5} mt={2}>
-        {TvShowList?.map((item) => (
-          <Grid key={item.id} item xs={6} sm={4} md={3}>
-            <TCard key={item.id} item={item} />
+        </>
+      )}
+      {TvShowList && (
+        <>
+          <Typography variant="h5" mb={2} mt={10}>
+            FAVORITE TV SHOWS
+          </Typography>
+          <Divider />
+          <Grid container direction="row" spacing={5} mt={2}>
+            {TvShowList?.map((item) => (
+              <Grid key={item.id} item xs={6} sm={4} md={3}>
+                <TCard key={item.id} item={item} />
+              </Grid>
+            ))}
           </Grid>
-        ))}
-      </Grid>
+        </>
+      )}
     </>
   );
 }
