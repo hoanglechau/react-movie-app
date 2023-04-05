@@ -12,6 +12,7 @@ function Home() {
   const [searchParams] = useSearchParams();
   const q = searchParams.get("q");
 
+  // Fetch the list of trending movies
   useEffect(() => {
     const fetchData = async () => {
       try {
