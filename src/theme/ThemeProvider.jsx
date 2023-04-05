@@ -5,6 +5,7 @@ import {
   ThemeProvider as MUIThemeProvider
 } from "@mui/material/styles";
 
+// Create a theme instance
 function ThemeProvider({ children }) {
   const themeOptions = {
     palette: {
