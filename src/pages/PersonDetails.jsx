@@ -1,6 +1,6 @@
 import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import apiService from "../api/apiService";
 import { API_KEY } from "../api/config";
@@ -18,7 +18,6 @@ function PersonDetails() {
         const res = await apiService.get(
           `person/${personId}?api_key=${API_KEY}&language=en-US`
         );
-        console.log(res.data);
         setpersonDetails(res.data);
         setLoading(false);
       } catch (e) {
