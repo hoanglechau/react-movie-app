@@ -5,8 +5,8 @@ import { API_KEY } from "../api/config";
 import MDetailsCard from "../components/MDetailsCard";
 
 function MovieDetails() {
-  let { movieId } = useParams();
-  const [loading, setLoading] = useState();
+  const { movieId } = useParams();
+  const [loading, setLoading] = useState(false);
   const [movieDetails, setMovieDetails] = useState(null);
 
   // Fetch movie details
