@@ -45,7 +45,7 @@ function PopularPeople() {
   return (
     <>
       <Typography variant="h5" mb={2}>
-        POPULAR PEOPLE
+        Popular People
       </Typography>
       <Divider />
 
