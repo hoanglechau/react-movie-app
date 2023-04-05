@@ -1,24 +1,26 @@
+import FilterListIcon from "@mui/icons-material/FilterList";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import Box from "@mui/material/Box";
+import Chip from "@mui/material/Chip";
 import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
 import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import apiService from "../api/apiService";
 import { API_KEY } from "../api/config";
 import MCard from "./MCard";
 
-export default function Movies() {
-  const [openGenres, setOpenGenres] = React.useState(false);
-  const [loading, setLoading] = React.useState();
-  const [genresList, setGenresList] = React.useState([]);
-  const [movieList, setMovieList] = React.useState([]);
-  const [genreId, setGenreId] = React.useState();
+function Movies() {
+  const [openGenres, setOpenGenres] = useState(false);
+  const [loading, setLoading] = useState();
+  const [genresList, setGenresList] = useState([]);
+  const [movieList, setMovieList] = useState([]);
+  const [genreId, setGenreId] = useState();
   const [searchParams] = useSearchParams();
   const q = searchParams.get("q");
 
@@ -111,67 +113,80 @@ export default function Movies() {
                 </Grid>
               ))}
         </Grid>
-        <Stack minWidth="150px" width={{ xs: "10%" }}>
-          <Box>
-            <ListItemButton
-              alignItems="flex-start"
-              onClick={() => setOpenGenres(!openGenres)}
+        {!q && (
+          <Stack minWidth="150px" width={{ xs: "10%" }}>
+            <Box
               sx={{
-                pr: 2,
-                pt: 2.5,
-                pb: openGenres ? 0 : 2.5,
-                "&:hover, &:focus": {
-                  "& svg": { opacity: openGenres ? 1 : 0 },
-                },
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-end"
               }}
             >
-              <ListItemText
-                primary="Genres"
-                primaryTypographyProps={{
-                  fontSize: 18,
-                  fontWeight: "medium",
-                  lineHeight: "20px",
-                  mb: "2px",
-                }}
-                sx={{ my: 0 }}
-              />
-              <KeyboardArrowDownIcon
+              <ListItemButton
+                alignItems="center"
+                onClick={() => setOpenGenres(!openGenres)}
                 sx={{
-                  mr: -1,
-                  opacity: 0,
-                  transform: openGenres ? "rotate(-180deg)" : "rotate(0)",
+                  p: 0,
                   transition: "0.2s",
+                  "&:hover": { color: "primary.main" }
                 }}
-              />
-            </ListItemButton>
-            {openGenres &&
-              genresList.map((item) => (
-                <ListItemButton
-                  key={item.id}
-                  onClick={() => setGenreId(item.id)}
+              >
+                <IconButton color="inherit" children={<FilterListIcon />} />
+                <Typography
                   sx={{
-                    py: 0,
-                    minHeight: 40,
-                    color: "rgba(255,255,255,.8)",
-                    "&:focus": {
-                      backgroundColor: "rgba(225,0,0,0.1)",
-                    },
+                    fontSize: 18,
+                    fontWeight: "medium",
+                    lineHeight: "20px",
+                    mb: "2px",
+                    my: 0
                   }}
                 >
-                  <ListItemText
+                  Genres
+                </Typography>
+                <KeyboardArrowDownIcon
+                  sx={{
+                    mr: -1,
+                    transform: openGenres ? "rotate(0deg)" : "rotate(90deg)",
+                    transition: "0.2s"
+                  }}
+                />
+              </ListItemButton>
+              {openGenres &&
+                genresList.map((item) => (
+                  <ListItemButton
                     key={item.id}
-                    primary={item.name}
-                    primaryTypographyProps={{
-                      fontSize: 16,
-                      fontWeight: "light",
+                    onClick={() => setGenreId(item.id)}
+                    disableRipple={true}
+                    sx={{
+                      py: 0,
+                      p: 0,
+                      minHeight: 40,
+                      color: "inherit"
                     }}
-                  />
-                </ListItemButton>
-              ))}
-            <Divider sx={{ marginTop: 3 }} />
-          </Box>
-        </Stack>
+                  >
+                    <Chip
+                      variant="outlined"
+                      key={item.id}
+                      label={item.name}
+                      sx={{
+                        fontSize: 12,
+                        fontWeight: "bold",
+                        "&:hover": {
+                          color: "white",
+                          backgroundColor: "primary.light",
+                          cursor: "pointer"
+                        }
+                      }}
+                    />
+                  </ListItemButton>
+                ))}
+              <Divider sx={{ marginTop: 3 }} />
+            </Box>
+          </Stack>
+        )}
       </Stack>
     </>
   );
 }
+
+export default Movies;
