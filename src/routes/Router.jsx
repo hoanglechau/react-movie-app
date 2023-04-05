@@ -12,6 +12,7 @@ import PopularPeople from "../pages/PopularPeople";
 import PopularTvShows from "../pages/PopularTvShows";
 import TvShowDetails from "../pages/TvShowDetails";
 
+// This component is used to protect the /favorite route
 function RequireAuth({ children }) {
   let location = useLocation();
   let auth = useAuth();
@@ -21,6 +22,7 @@ function RequireAuth({ children }) {
   return children;
 }
 
+// This component is used to render the routes
 function Router() {
   let location = useLocation();
   let state = location.state;
