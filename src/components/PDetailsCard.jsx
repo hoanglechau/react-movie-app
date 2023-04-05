@@ -1,10 +1,10 @@
 import Box from "@mui/material/Box";
+import CardMedia from "@mui/material/CardMedia";
+import Chip from "@mui/material/Chip";
 import Divider from "@mui/material/Divider";
 import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import { Chip } from "@mui/material";
-import React from "react";
 import { dateConvert } from "../utils/converters";
 
 function PDetailsCard({ personDetails, loading }) {
@@ -30,14 +30,19 @@ function PDetailsCard({ personDetails, loading }) {
             minWidth="350px"
             sx={{
               borderRadius: "10px",
+              minWidth: { xs: "100%", md: 350 }
             }}
           >
             <Box>
-              <img
-                alt={`${personDetails.name}`}
-                height="500px"
+              <CardMedia
+                component="img"
+                alt={`${personDetails.title}`}
                 src={`https://www.themoviedb.org/t/p/original/${personDetails.profile_path}`}
-                style={{ borderRadius: "10px" }}
+                sx={{
+                  borderRadius: 5,
+                  height: { xs: "auto", md: 500 },
+                  p: 2
+                }}
               />
             </Box>
           </Stack>
@@ -46,11 +51,14 @@ function PDetailsCard({ personDetails, loading }) {
             my={3}
             pl={{ xs: 0, md: 1 }}
             minHeight="100%"
-            minWidth="400px"
             justifyContent="space-evenly"
+            sx={{ minWidth: { xs: "100%", md: 400 } }}
           >
             <Stack>
-              <Typography variant="h3">{`${personDetails.name}`}</Typography>
+              <Typography
+                mb={1}
+                sx={{ typography: { xs: "h4", md: "h3" } }}
+              >{`${personDetails.name}`}</Typography>
             </Stack>
 
             {personDetails.birthday && (
@@ -121,7 +129,9 @@ function PDetailsCard({ personDetails, loading }) {
 
             {personDetails.biography && (
               <Stack my={{ xs: 2, md: 0 }}>
-                <Typography variant="h6">Biography</Typography>
+                <Typography sx={{ typography: { xs: "h5", md: "h6" } }}>
+                  Biography
+                </Typography>
                 <Typography variant="body">
                   {`${personDetails.biography}`}
                 </Typography>
