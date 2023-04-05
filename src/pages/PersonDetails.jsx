@@ -11,6 +11,7 @@ function PersonDetails() {
   const [loading, setLoading] = useState();
   const [personDetails, setpersonDetails] = useState(null);
 
+  // Fetch person details
   useEffect(() => {
     const fetchData = async () => {
       try {
