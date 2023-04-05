@@ -1,5 +1,4 @@
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
-import AddIcon from "@mui/icons-material/Add";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
 import LiveTvIcon from "@mui/icons-material/LiveTv";
@@ -30,28 +29,33 @@ function MainHeader() {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const handleProfileMenuOpen = (event) => {
+  // Menu for desktop devices
+  const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
-  };
-
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
   };
 
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
 
+  // Menu for mobile devices
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+
+  const handleMobileMenuClose = () => {
+    setMobileMoreAnchorEl(null);
+  };
+
   const handleLogout = () => {
     handleMenuClose();
     handleMobileMenuClose();
     auth.signout();
+    // Redirect to home page after logging out
     navigate("/");
   };
 
+  // Menu for desktop devices
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -106,6 +110,7 @@ function MainHeader() {
     </Menu>
   );
 
+  // Menu for mobile devices
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
     <Menu
@@ -277,15 +282,15 @@ function MainHeader() {
               to="/favorite"
               size="large"
               color="inherit"
-              children={<AddIcon />}
+              children={<FavoriteBorderIcon />}
             />
 
             <IconButton
               size="large"
-              aria-label="account of current user"
+              aria-label="user account"
               aria-controls={menuId}
               aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
+              onClick={handleMenuOpen}
               color="inherit"
               children={<AccountBoxIcon />}
             />
@@ -293,7 +298,7 @@ function MainHeader() {
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
-              aria-label="show more"
+              aria-label="more"
               aria-controls={mobileMenuId}
               aria-haspopup="true"
               onClick={handleMobileMenuOpen}
