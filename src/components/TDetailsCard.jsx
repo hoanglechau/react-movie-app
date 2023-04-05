@@ -1,14 +1,15 @@
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import RecommendIcon from "@mui/icons-material/Recommend";
 import LoyaltyIcon from "@mui/icons-material/Loyalty";
+import RecommendIcon from "@mui/icons-material/Recommend";
 import Box from "@mui/material/Box";
+import CardMedia from "@mui/material/CardMedia";
 import Chip from "@mui/material/Chip";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import React, { useState } from "react";
+import { useState } from "react";
 import { dateConvert } from "../utils/converters";
 
 function TDetailsCard({ tvShowDetails, loading }) {
@@ -29,7 +30,7 @@ function TDetailsCard({ tvShowDetails, loading }) {
           name: name,
           poster_path: poster,
           vote_average: voteAverage,
-          vote_count: voteCount,
+          vote_count: voteCount
         });
         localStorage.setItem("favoriteTvShows", JSON.stringify(list));
         setTvShowMessage("Added to Favorites!");
@@ -42,7 +43,7 @@ function TDetailsCard({ tvShowDetails, loading }) {
         name: name,
         poster_path: poster,
         vote_average: voteAverage,
-        vote_count: voteCount,
+        vote_count: voteCount
       });
       localStorage.setItem("favoriteTvShows", JSON.stringify(list));
       setTvShowMessage("Added!");
@@ -65,22 +66,26 @@ function TDetailsCard({ tvShowDetails, loading }) {
           minWidth="80%"
           flexDirection={{ xs: "column", md: "row" }}
           sx={{
-            borderRadius: "10px",
+            borderRadius: "10px"
           }}
         >
           <Stack
             my={3}
-            minWidth="350px"
             sx={{
               borderRadius: "10px",
+              minWidth: { xs: "100%", md: 350 }
             }}
           >
             <Box>
-              <img
-                alt={`${tvShowDetails.name}`}
-                height="500px"
+              <CardMedia
+                component="img"
+                alt={`${tvShowDetails.title}`}
                 src={`https://www.themoviedb.org/t/p/original/${tvShowDetails.poster_path}`}
-                style={{ borderRadius: "10px" }}
+                sx={{
+                  borderRadius: 5,
+                  height: { xs: "auto", md: 500 },
+                  p: 2
+                }}
               />
             </Box>
           </Stack>
@@ -89,15 +94,15 @@ function TDetailsCard({ tvShowDetails, loading }) {
             my={3}
             pl={{ xs: 0, md: 1 }}
             minHeight="100%"
-            minWidth="400px"
             justifyContent="space-evenly"
+            sx={{ minWidth: { xs: "100%", md: 400 } }}
           >
             <Stack
               justifyContent="space-between"
               alignItems="center"
               flexDirection="row"
             >
-              <Typography mb={1} variant="h3">
+              <Typography mb={1} sx={{ typography: { xs: "h4", md: "h3" } }}>
                 {`${tvShowDetails.name}`}
               </Typography>
               <Stack flexDirection="column" alignItems="end">
@@ -115,13 +120,13 @@ function TDetailsCard({ tvShowDetails, loading }) {
                   children={<LoyaltyIcon fontSize="large" />}
                   color="primary"
                   sx={{
-                    marginRight: "30px",
+                    marginRight: { xs: 0, md: "30px" }
                   }}
                 />
                 <Typography
                   sx={{
-                    marginRight: "34px",
-                    marginTop: "10px",
+                    marginRight: { xs: 0, md: "34px" },
+                    marginTop: { xs: 0, md: "10px" }
                   }}
                   color="error"
                 >
@@ -129,8 +134,11 @@ function TDetailsCard({ tvShowDetails, loading }) {
                 </Typography>
               </Stack>
             </Stack>
+
             <Stack my={{ xs: 2, md: 0 }}>
-              <Typography variant="h6">Overview</Typography>
+              <Typography sx={{ typography: { xs: "h5", md: "h6" } }}>
+                Overview
+              </Typography>
               <Typography variant="body">{`${tvShowDetails.overview}`}</Typography>
             </Stack>
 
@@ -165,7 +173,7 @@ function TDetailsCard({ tvShowDetails, loading }) {
                   key={`${item.id}`}
                   label={`${item.name}`}
                   size="small"
-                  variant="filled"
+                  variant="outlined"
                 />
               ))}
             </Stack>
