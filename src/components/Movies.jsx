@@ -103,12 +103,18 @@ function Movies() {
         <Grid container direction="row" spacing={2} mt={2}>
           {loading
             ? placeholder.map((item) => (
-                <Grid key={item} item xs={10} sm={6} md={4} lg={3}>
+                <Grid key={item} item xs={10} sm={3} md={4} lg={3}>
                   {detailSkeleton}
                 </Grid>
               ))
+            : q
+            ? movieList.map((item) => (
+                <Grid key={item.id} item xs={6} sm={3} md={4} lg={3}>
+                  <MCard key={item.id} item={item} />
+                </Grid>
+              ))
             : movieList.map((item) => (
-                <Grid key={item.id} item xs={10} sm={6} md={4} lg={3}>
+                <Grid key={item.id} item xs={8} sm={4} md={4} lg={3}>
                   <MCard key={item.id} item={item} />
                 </Grid>
               ))}
