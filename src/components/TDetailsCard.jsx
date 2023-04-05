@@ -10,10 +10,13 @@ import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
+import { useAuth } from "../contexts/AuthContext";
 import { dateConvert } from "../utils/converters";
 
 function TDetailsCard({ tvShowDetails, loading }) {
   const [tvShowMessage, setTvShowMessage] = useState();
+  // This is for the conditional rendering of the favorite button
+  const auth = useAuth();
 
   const addFavoriteTvShow = (name, poster, voteAverage, voteCount, id) => {
     let list = JSON.parse(localStorage.getItem("favoriteTvShows"));
@@ -105,34 +108,36 @@ function TDetailsCard({ tvShowDetails, loading }) {
               <Typography mb={1} sx={{ typography: { xs: "h4", md: "h3" } }}>
                 {`${tvShowDetails.name}`}
               </Typography>
-              <Stack flexDirection="column" alignItems="end">
-                <IconButton
-                  onClick={() =>
-                    addFavoriteTvShow(
-                      tvShowDetails.name,
-                      tvShowDetails.poster_path,
-                      tvShowDetails.vote_average,
-                      tvShowDetails.vote_count,
-                      tvShowDetails.id
-                    )
-                  }
-                  size="large"
-                  children={<LoyaltyIcon fontSize="large" />}
-                  color="primary"
-                  sx={{
-                    marginRight: { xs: 0, md: "30px" }
-                  }}
-                />
-                <Typography
-                  sx={{
-                    marginRight: { xs: 0, md: "34px" },
-                    marginTop: { xs: 0, md: "10px" }
-                  }}
-                  color="error"
-                >
-                  {tvShowMessage}
-                </Typography>
-              </Stack>
+              {auth.user && (
+                <Stack flexDirection="column" alignItems="end">
+                  <IconButton
+                    onClick={() =>
+                      addFavoriteTvShow(
+                        tvShowDetails.name,
+                        tvShowDetails.poster_path,
+                        tvShowDetails.vote_average,
+                        tvShowDetails.vote_count,
+                        tvShowDetails.id
+                      )
+                    }
+                    size="large"
+                    children={<LoyaltyIcon fontSize="large" />}
+                    color="primary"
+                    sx={{
+                      marginRight: { xs: 0, md: "30px" }
+                    }}
+                  />
+                  <Typography
+                    sx={{
+                      marginRight: { xs: 0, md: "34px" },
+                      marginTop: { xs: 0, md: "10px" }
+                    }}
+                    color="error"
+                  >
+                    {tvShowMessage}
+                  </Typography>
+                </Stack>
+              )}
             </Stack>
 
             <Stack my={{ xs: 2, md: 0 }}>
