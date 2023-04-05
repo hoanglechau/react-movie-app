@@ -5,7 +5,7 @@ import { API_KEY } from "../api/config";
 import TDetailsCard from "../components/TDetailsCard";
 
 function TvShowDetails() {
-  let { tvId } = useParams();
+  const { tvId } = useParams();
   const [loading, setLoading] = useState();
   const [tvShowDetails, setTvShowDetails] = useState(null);
 
