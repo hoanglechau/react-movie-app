@@ -14,8 +14,9 @@ import TvShowDetails from "../pages/TvShowDetails";
 
 // This component is used to protect the /favorite route
 function RequireAuth({ children }) {
-  let location = useLocation();
-  let auth = useAuth();
+  const location = useLocation();
+  const auth = useAuth();
+
   if (!auth.user) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
@@ -24,8 +25,8 @@ function RequireAuth({ children }) {
 
 // This component is used to render the routes
 function Router() {
-  let location = useLocation();
-  let state = location.state;
+  const location = useLocation();
+  const state = location.state;
 
   return (
     <>
