@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import apiService from "../api/apiService";
-import { API_KEY } from "../api/config";
-import Grid from "@mui/material/Grid";
-import Stack from "@mui/material/Stack";
-import TCard from "../components/TCard";
-import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
+import Grid from "@mui/material/Grid";
 import Pagination from "@mui/material/Pagination";
 import PaginationItem from "@mui/material/PaginationItem";
-import { Link, useParams } from "react-router-dom";
 import Skeleton from "@mui/material/Skeleton";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import apiService from "../api/apiService";
+import { API_KEY } from "../api/config";
+import TCard from "../components/TCard";
 
 function PopularTvShows() {
   const [loading, setLoading] = useState();
