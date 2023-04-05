@@ -1,10 +1,9 @@
-import * as React from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import MainLayout from "../layouts/MainLayout";
 import Favorites from "../pages/Favorites";
-import LoginForm from "../pages/LoginForm";
 import Home from "../pages/Home";
+import LoginForm from "../pages/LoginForm";
 import MovieDetails from "../pages/MovieDetails";
 import NoMatch from "../pages/NoMatch";
 import PersonDetails from "../pages/PersonDetails";
