@@ -4,26 +4,26 @@ import CardActionArea from "@mui/material/CardActionArea";
 import CardContent from "@mui/material/CardContent";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-import * as React from "react";
 import { Link } from "react-router-dom";
 import "../styles.css";
 
-export default function PCard({ item }) {
+function PCard({ item }) {
   return (
-    <Card className="card" sx={{ width: 200, borderRadius: "3px" }}>
+    <Card
+      className="card"
+      sx={{ width: { xs: 130, md: 200 }, borderRadius: 2 }}
+    >
       <CardActionArea LinkComponent={Link} to={`/person/${item.id}`}>
         <Box
           display="flex"
           flexDirection="column"
           justifyContent="flex-end"
-          sx={[
-            {
-              backgroundImage: `url(https://image.tmdb.org/t/p/original/${item.profile_path})`,
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "cover",
-              height: "300px",
-            },
-          ]}
+          sx={{
+            backgroundImage: `url(https://image.tmdb.org/t/p/original/${item.profile_path})`,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+            height: { xs: 200, md: 300 }
+          }}
         >
           <Paper className="content-person">
             <CardContent>
@@ -34,11 +34,16 @@ export default function PCard({ item }) {
                 sx={[
                   {
                     maxHeight: "30%",
-                    overflow: "hidden",
-                  },
+                    overflow: "hidden"
+                  }
                 ]}
               >
-                <Typography gutterBottom variant="body1" component="div">
+                <Typography
+                  color="primary.contrastText"
+                  gutterBottom
+                  variant="body1"
+                  component="div"
+                >
                   {`${item.name}`}
                 </Typography>
               </Box>
@@ -49,3 +54,5 @@ export default function PCard({ item }) {
     </Card>
   );
 }
+
+export default PCard;
