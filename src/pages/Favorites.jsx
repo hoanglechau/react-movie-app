@@ -1,7 +1,6 @@
 import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import React from "react";
 import MCard from "../components/MCard";
 import TCard from "../components/TCard";
 
