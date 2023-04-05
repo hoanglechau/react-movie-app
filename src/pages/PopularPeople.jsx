@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
-import apiService from "../api/apiService";
-import { API_KEY } from "../api/config";
-import Grid from "@mui/material/Grid";
-import Stack from "@mui/material/Stack";
-import PCard from "../components/PCard";
-import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
+import Grid from "@mui/material/Grid";
 import Pagination from "@mui/material/Pagination";
 import PaginationItem from "@mui/material/PaginationItem";
-import { Link, useParams } from "react-router-dom";
 import Skeleton from "@mui/material/Skeleton";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import apiService from "../api/apiService";
+import { API_KEY } from "../api/config";
+import PCard from "../components/PCard";
 
 function PopularPeople() {
   const [loading, setLoading] = useState();
-  const [movieList, setMovieList] = useState([]);
+  const [personList, setPersonList] = useState([]);
   const { pageId } = useParams();
 
   useEffect(() => {
@@ -23,7 +23,7 @@ function PopularPeople() {
         const res = await apiService.get(
           `person/popular?api_key=${API_KEY}&page=${pageId}&language=en-US`
         );
-        setMovieList(res.data.results);
+        setPersonList(res.data.results);
         setLoading(false);
       } catch (e) {
         console.log(e.message);
@@ -52,7 +52,7 @@ function PopularPeople() {
                 {detailSkeleton}
               </Grid>
             ))
-          : movieList.map((item) => (
+          : personList.map((item) => (
               <Grid key={item.id} item xs={6} sm={4} md={3}>
                 <PCard key={item.id} item={item} />
               </Grid>
