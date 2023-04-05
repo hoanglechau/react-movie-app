@@ -5,6 +5,7 @@ const apiService = axios.create({
   baseURL: BASE_URL
 });
 
+// Add a request interceptor
 apiService.interceptors.request.use(
   (request) => {
     return request;
@@ -15,6 +16,7 @@ apiService.interceptors.request.use(
   }
 );
 
+// Add a response interceptor
 apiService.interceptors.response.use(
   (response) => {
     return response;
