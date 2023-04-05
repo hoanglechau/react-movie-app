@@ -24,7 +24,7 @@ function ThemeProvider({ children }) {
     },
     shape: { borderRadius: 8 },
     typography: {
-      fontFamily: "'Work Sans', sans-serif",
+      fontFamily: "'Noto Sans', sans-serif",
       h5: {
         fontWeight: 800,
         letterSpacing: 3
