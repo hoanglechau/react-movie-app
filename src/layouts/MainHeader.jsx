@@ -1,8 +1,13 @@
-import AccountCircle from "@mui/icons-material/AccountCircle";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import AddIcon from "@mui/icons-material/Add";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
+import LiveTvIcon from "@mui/icons-material/LiveTv";
+import LoginIcon from "@mui/icons-material/Login";
+import LogoutIcon from "@mui/icons-material/Logout";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import StarIcon from "@mui/icons-material/Star";
-import YouTubeIcon from "@mui/icons-material/YouTube";
+import RecentActorsIcon from "@mui/icons-material/RecentActors";
+import TheatersIcon from "@mui/icons-material/Theaters";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -10,17 +15,18 @@ import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
-import * as React from "react";
-import { Link, useLocation } from "react-router-dom";
+import Typography from "@mui/material/Typography";
+import { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import MSearchBar from "../components/MSearchBar";
 import { useAuth } from "../contexts/AuthContext";
 
-export default function MainHeader() {
-  let location = useLocation();
-  let auth = useAuth();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
+function MainHeader() {
+  const location = useLocation();
+  const auth = useAuth();
+  const navigate = useNavigate();
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -34,58 +40,68 @@ export default function MainHeader() {
 
   const handleMenuClose = () => {
     setAnchorEl(null);
-    handleMobileMenuClose();
-    console.log(location);
   };
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
   const handleLogout = () => {
-    handleMenuClose(); //menu close before signout so that login won't pop up.
+    handleMenuClose();
+    handleMobileMenuClose();
     auth.signout();
+    navigate("/");
   };
+
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{
         vertical: "top",
-        horizontal: "right",
+        horizontal: "right"
       }}
       id={menuId}
       keepMounted
       transformOrigin={{
         vertical: "top",
-        horizontal: "right",
+        horizontal: "right"
       }}
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
       {auth.user ? (
-        <Box sx={{ display: "flex", flexDirection: "column" }}>
-          <Button
-            color="inherit"
-            component={Link}
-            to="/favorite"
-            onClick={handleMenuClose}
-          >
-            {auth.user}
-          </Button>
-          <Button color="inherit" onClick={() => handleLogout()}>
-            Log out
-          </Button>
+        <Box>
+          <MenuItem component={Link} to="favorite" onClick={handleMenuClose}>
+            <IconButton
+              color="inherit"
+              disableRipple={true}
+              children={<InsertEmoticonIcon />}
+            />
+            <p>{auth.user}</p>
+          </MenuItem>
+          <MenuItem onClick={handleLogout}>
+            <IconButton
+              color="inherit"
+              disableRipple={true}
+              children={<LogoutIcon />}
+            />
+            <p>Log out</p>
+          </MenuItem>
         </Box>
       ) : (
-        <Button
-          color="inherit"
+        <MenuItem
           component={Link}
-          to="/login"
+          to="login"
           state={{ backgroundLocation: location, from: location }}
           onClick={handleMenuClose}
         >
-          Log in
-        </Button>
+          <IconButton
+            color="inherit"
+            disableRipple={true}
+            children={<LoginIcon />}
+          />
+          <p>Log in</p>
+        </MenuItem>
       )}
     </Menu>
   );
@@ -96,72 +112,126 @@ export default function MainHeader() {
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{
         vertical: "top",
-        horizontal: "right",
+        horizontal: "right"
       }}
       id={mobileMenuId}
       keepMounted
       transformOrigin={{
         vertical: "top",
-        horizontal: "right",
+        horizontal: "right"
       }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem component={Link} to="/discovery/1">
+      <MenuItem
+        component={Link}
+        to="movie/popular/1"
+        onClick={handleMobileMenuClose}
+      >
         <IconButton
           size="large"
           color="inherit"
           disableRipple={true}
-          children={<YouTubeIcon />}
+          children={<TheatersIcon />}
         />
-        <p>Discovery</p>
+        <p>Movies</p>
       </MenuItem>
 
-      <MenuItem component={Link} to="/favorite">
+      <MenuItem
+        component={Link}
+        to="tv/popular/1"
+        onClick={handleMobileMenuClose}
+      >
         <IconButton
           size="large"
           color="inherit"
           disableRipple={true}
-          children={<StarIcon />}
+          children={<LiveTvIcon />}
         />
 
-        <p>Favorite</p>
+        <p>TV Shows</p>
       </MenuItem>
-      <MenuItem component={Link} to="/login">
+      <MenuItem
+        component={Link}
+        to="person/popular/1"
+        onClick={handleMobileMenuClose}
+      >
         <IconButton
           size="large"
-          aria-label="account of current user"
-          aria-controls={menuId}
-          disableRipple={true}
-          aria-haspopup="true"
           color="inherit"
-          children={<AccountCircle />}
+          disableRipple={true}
+          children={<RecentActorsIcon />}
         />
 
-        <p>Profile</p>
+        <p>People</p>
       </MenuItem>
+      {auth.user ? (
+        <Box>
+          <MenuItem
+            component={Link}
+            to="favorite"
+            onClick={handleMobileMenuClose}
+          >
+            <IconButton
+              size="large"
+              aria-label="favorite"
+              aria-controls={mobileMenuId}
+              disableRipple={true}
+              color="inherit"
+              children={<FavoriteBorderIcon />}
+            />
+            <p>Favorites</p>
+          </MenuItem>
+          <MenuItem onClick={handleLogout}>
+            <IconButton
+              size="large"
+              aria-label="log out"
+              aria-controls={mobileMenuId}
+              disableRipple={true}
+              color="inherit"
+              children={<LogoutIcon />}
+            />
+            <p>Log out</p>
+          </MenuItem>
+        </Box>
+      ) : (
+        <MenuItem component={Link} to="login" onClick={handleMobileMenuClose}>
+          <IconButton
+            size="large"
+            aria-label="login"
+            aria-controls={mobileMenuId}
+            disableRipple={true}
+            aria-haspopup="true"
+            color="inherit"
+            children={<LoginIcon />}
+          />
+          <p>Log in</p>
+        </MenuItem>
+      )}
     </Menu>
   );
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
-        <Toolbar>
-          <Box sx={{ flexGrow: 0.1 }} />
-          <Button
-            variant="outlined"
-            size="large"
+        <Toolbar sx={{ p: { xs: 1, md: 0 } }}>
+          <Box sx={{ flexGrow: { xs: 1, md: 0.1 } }} />
+          <Typography
             component={Link}
             to="/"
             color="inherit"
-            sx={{ textDecoration: "none", p: 0 }}
+            sx={{
+              textDecoration: "none",
+              p: 0,
+              typography: { sm: "h6", md: "h5", lg: "h3" }
+            }}
           >
             HMDB
-          </Button>
-          <Box sx={{ flexGrow: 0.05 }} />
+          </Typography>
+          <Box sx={{ flexGrow: 0.1 }} />
           <Box
             sx={{
-              display: { xs: "none", md: "flex" },
+              display: { xs: "none", md: "flex" }
             }}
           >
             <Button
@@ -199,7 +269,7 @@ export default function MainHeader() {
           <MSearchBar />
           <Box
             sx={{
-              display: { xs: "none", md: "flex" },
+              display: { xs: "none", md: "flex" }
             }}
           >
             <IconButton
@@ -212,13 +282,12 @@ export default function MainHeader() {
 
             <IconButton
               size="large"
-              //cool styling ui props
               aria-label="account of current user"
               aria-controls={menuId}
               aria-haspopup="true"
               onClick={handleProfileMenuOpen}
               color="inherit"
-              children={<AccountCircle />}
+              children={<AccountBoxIcon />}
             />
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
@@ -233,7 +302,7 @@ export default function MainHeader() {
               <MoreIcon />
             </IconButton>
           </Box>
-          <Box sx={{ flexGrow: 0.1 }} />
+          <Box sx={{ flexGrow: 0.1, display: { xs: "none", md: "flex" } }} />
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
@@ -241,3 +310,5 @@ export default function MainHeader() {
     </Box>
   );
 }
+
+export default MainHeader;
