@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useMemo, useState } from "react";
 
 // This is the context that will be used to store the user data
 const AuthContextType = {
@@ -10,16 +10,18 @@ const AuthContext = createContext(AuthContextType);
 
 // This component is used to provide the context to the children
 export function AuthProvider({ children }) {
-  let [user, setUser] = useState("");
-  let signin = (newUser, callback) => {
+  const [user, setUser] = useState("");
+
+  const signin = (newUser, callback) => {
     setUser(newUser);
     callback();
   };
-  let signout = () => {
+
+  const signout = () => {
     setUser(null);
   };
 
-  let value = { user, signin, signout };
+  const value = useMemo(() => ({ user, signin, signout }), [user]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
