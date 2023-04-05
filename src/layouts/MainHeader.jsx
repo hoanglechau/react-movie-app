@@ -233,7 +233,7 @@ function MainHeader() {
           >
             HMDB
           </Typography>
-          <Box sx={{ flexGrow: 0.1 }} />
+          <Box sx={{ flexGrow: { xs: 1, sm: 0.1 } }} />
           <Box
             sx={{
               display: { xs: "none", md: "flex" }
