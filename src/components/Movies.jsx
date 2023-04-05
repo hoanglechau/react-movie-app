@@ -17,10 +17,10 @@ import MCard from "./MCard";
 
 function Movies() {
   const [openGenres, setOpenGenres] = useState(false);
-  const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState(false);
   const [genresList, setGenresList] = useState([]);
   const [movieList, setMovieList] = useState([]);
-  const [genreId, setGenreId] = useState();
+  const [genreId, setGenreId] = useState("");
   const [searchParams] = useSearchParams();
   const q = searchParams.get("q");
 
