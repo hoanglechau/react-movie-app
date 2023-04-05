@@ -1,3 +1,4 @@
+// This file contains all the functions that convert the data from the API to a more readable format
 export const timeConvert = (time) => {
   let hours = time / 60;
   let roundedHours = Math.floor(hours);
