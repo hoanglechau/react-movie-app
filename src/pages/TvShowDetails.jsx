@@ -10,6 +10,8 @@ function TvShowDetails() {
   let { tvId } = useParams();
   const [loading, setLoading] = useState();
   const [tvShowDetails, setTvShowDetails] = useState(null);
+
+  // Fetch TV show details
   useEffect(() => {
     const fetchData = async () => {
       try {
